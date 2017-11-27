@@ -2,11 +2,14 @@ class Snow {
   float x = random(width);
   float y = random(-500, -50);
   float z = random(0, 20);
-  float yspeed = map(z, 0, 20, 0.5, 1);
-  float xspeed = random(-0.2, 0.2);
-  float xaccel = random(-0.1, 0.1);
+  float yspeed = map(z, 0, 20, 0.3, .7);
+  float xspeed = random(-0.05, 0.05);
+  float xaccel = random(-0.01, 0.01);
+  
+  // TODO: define limits above, speeds upon refresh are off
   
   void fall() {
+    
     
     xspeed = xspeed + xaccel;
     x = x + xspeed;
@@ -31,15 +34,15 @@ class Snow {
     
     if (xspeed > 0.5 || xspeed < -0.5) {
       if (xaccel > 0) {
-        xaccel = random(-0.1);
+        xaccel = random(-0.01);
       } else {
-        xaccel = random(0.1);
+        xaccel = random(0.01);
       }
     }
   }
   
   void show() {
-    float thick = map(z, 0, 20, 2, 5);
+    float thick = map(z, 0, 20, 0.5, 4);
     noStroke();
     fill(255, 255, 255);
     ellipse(x, y, thick, thick);

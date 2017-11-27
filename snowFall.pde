@@ -1,4 +1,4 @@
-Snow[] snow = new Snow[100];
+Snow[] snow = new Snow[300];
 
 
 void setup() {
