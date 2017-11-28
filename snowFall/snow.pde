@@ -22,14 +22,9 @@ class Snow {
     
     // if snowflakes reach the bottom of the screen
     // they're reset at the top
-    if (y >= height) {
-      //FallenSnow fallenSnow = new FallenSnow(x, y, z);
-      //fallenSnow.cover();
-      
+    if (y > height + 10) { 
       y = random(-200, -100);
       yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
-      //yspeed = 0;
-      //xspeed = 0;
     }
     
     // if snowflakes go off the screen left or right
@@ -60,6 +55,5 @@ class Snow {
     ellipse(x, y, thick, thick);
   }
 
-  
   
 }
