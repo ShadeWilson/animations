@@ -1,22 +1,20 @@
 class Snow {
   float x = random(width);
   float y = random(-500, -50);
-  float z = random(0, 20);
+  float z = random(0, 1);
   
   float yspeedMax = 0.7;
   float yspeedMin = 0.3;
   
-  float xspeedMax = 0.05;
-  float xspeedLimit = 0.15;
-  float xaccelMax = 0.01;
+  float xspeedMax = 0.05 * z;
+  float xspeedLimit = 0.15 * z;
+  float xaccelMax = 0.01 * z;
   
-  float yspeed = map(z, 0, 20, yspeedMin, yspeedMax);
+  float yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
   float xspeed = random(-xspeedMax, xspeedMax);
   float xaccel = random(-xaccelMax, xaccelMax);
   
-  
   void fall() {
-    
     
     xspeed = xspeed + xaccel;
     x = x + xspeed;
@@ -29,7 +27,7 @@ class Snow {
       //fallenSnow.cover();
       
       y = random(-200, -100);
-      yspeed = map(z, 0, 20, yspeedMin, yspeedMax);
+      yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
       //yspeed = 0;
       //xspeed = 0;
     }
@@ -38,7 +36,7 @@ class Snow {
     // they're reset at the top
     if (x > width || x < 0) {
       y = random(-200, -100);
-      yspeed = map(z, 0, 20, yspeedMin, yspeedMax);
+      yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
       x = random(width);
       xspeed = random(-xspeedMax, xspeedMax);
     }
@@ -56,7 +54,7 @@ class Snow {
   }
   
   void show() {
-    float thick = map(z, 0, 20, 0.5, 4);
+    float thick = map(z, 0, 1, 0.5, 4);
     noStroke();
     fill(255, 255, 255);
     ellipse(x, y, thick, thick);
