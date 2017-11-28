@@ -2,11 +2,18 @@ class Snow {
   float x = random(width);
   float y = random(-500, -50);
   float z = random(0, 20);
-  float yspeed = map(z, 0, 20, 0.3, .7);
-  float xspeed = random(-0.05, 0.05);
-  float xaccel = random(-0.01, 0.01);
   
-  // TODO: define limits above, speeds upon refresh are off
+  float yspeedMax = 0.7;
+  float yspeedMin = 0.3;
+  
+  float xspeedMax = 0.05;
+  float xspeedLimit = 0.15;
+  float xaccelMax = 0.01;
+  
+  float yspeed = map(z, 0, 20, yspeedMin, yspeedMax);
+  float xspeed = random(-xspeedMax, xspeedMax);
+  float xaccel = random(-xaccelMax, xaccelMax);
+  
   
   void fall() {
     
@@ -15,28 +22,35 @@ class Snow {
     x = x + xspeed;
     y = y + yspeed;
     
+    // if snowflakes reach the bottom of the screen
+    // they're reset at the top
     if (y >= height) {
       //FallenSnow fallenSnow = new FallenSnow(x, y, z);
       //fallenSnow.cover();
       
       y = random(-200, -100);
-      yspeed = map(z, 0, 20, 0.2, 2);
+      yspeed = map(z, 0, 20, yspeedMin, yspeedMax);
       //yspeed = 0;
       //xspeed = 0;
     }
     
+    // if snowflakes go off the screen left or right
+    // they're reset at the top
     if (x > width || x < 0) {
       y = random(-200, -100);
-      yspeed = map(z, 0, 20, 0.2, 2);
+      yspeed = map(z, 0, 20, yspeedMin, yspeedMax);
       x = random(width);
-      xspeed = random(-1);
+      xspeed = random(-xspeedMax, xspeedMax);
     }
     
-    if (xspeed > 0.5 || xspeed < -0.5) {
+    // if the speed in the x direction is greater than the limit
+    // the acceleration is switched to the other direction
+    // with a random scalar from 0 - xaccelMax
+    if (xspeed > xspeedLimit || xspeed < -xspeedLimit) {
       if (xaccel > 0) {
-        xaccel = random(-0.01);
+        xaccel = random(-xaccelMax);
       } else {
-        xaccel = random(0.01);
+        xaccel = random(xaccelMax);
       }
     }
   }
