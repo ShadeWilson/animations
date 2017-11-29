@@ -2,6 +2,8 @@ class Snow {
   float x = random(width);
   float y = random(-500, -50);
   float z = random(0, 1);
+  float thick = map(z, 0, 1, 0.5, 4);
+  boolean hasFallen = false;
   
   float yspeedMax = 0.7;
   float yspeedMin = 0.3;
@@ -22,9 +24,10 @@ class Snow {
     
     // if snowflakes reach the bottom of the screen
     // they're reset at the top
-    if (y > height + 10) { 
+    if (y >= height + 1) {
       y = random(-200, -100);
       yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
+      hasFallen = false;
     }
     
     // if snowflakes go off the screen left or right
@@ -34,6 +37,7 @@ class Snow {
       yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
       x = random(width);
       xspeed = random(-xspeedMax, xspeedMax);
+      hasFallen = false;
     }
     
     // if the speed in the x direction is greater than the limit
@@ -49,11 +53,11 @@ class Snow {
   }
   
   void show() {
-    float thick = map(z, 0, 1, 0.5, 4);
     noStroke();
     fill(255, 255, 255);
     ellipse(x, y, thick, thick);
   }
 
+  
   
 }
