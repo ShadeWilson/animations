@@ -1,5 +1,5 @@
 Snow[] snow = new Snow[400];
-FallenSnow[] fallenSnow = new FallenSnow[4000];
+FallenSnow[] fallenSnow = new FallenSnow[10000];
 
 int fallCount = 0;
 float maxHeight = 4;
@@ -30,11 +30,13 @@ void draw() {
     }
     
     for (int j=0; j<fallenSnow.length; j++) {
+      if (snow[i].hasFallen == true) continue;
+      
       float d = sqrt(sq(snow[i].x - fallenSnow[j].x) + sq(snow[i].y - fallenSnow[j].y));
       float radius_sum = snow[i].thick + fallenSnow[j].thick;
       
       
-      if (d <= radius_sum) {
+      if (d < radius_sum) {
         fallenSnow[fallCount] = new FallenSnow(snow[i].x, snow[i].y, snow[i].z);
         snow[i].hasFallen = true;
         print(fallCount, "!");

@@ -5,7 +5,6 @@ class FallenSnow {
   //float thick = map(z, 0, 1, 0.5, 4);
   float thick = 5;
   
-  // static int  count = 0;
   
   FallenSnow(float xval, float yval, float zval) {
     x = xval;
