@@ -11,6 +11,7 @@ void setup() {
   }
   
   for (int i=0; i<fallenSnow.length; i++) {
+    // random point so it doesnt mess things up
     fallenSnow[i] = new FallenSnow(-5000, height + 100, 0);
   }
 }
@@ -25,7 +26,7 @@ void draw() {
    if (snow[i].y >= height) {
       fallenSnow[fallCount] = new FallenSnow(snow[i].x, snow[i].y, snow[i].z);
       snow[i].hasFallen = true;
-      print(fallCount, " ");
+      //print(fallCount, " ");
       fallCount++;
     }
     
@@ -34,12 +35,14 @@ void draw() {
       
       float d = sqrt(sq(snow[i].x - fallenSnow[j].x) + sq(snow[i].y - fallenSnow[j].y));
       float radius_sum = snow[i].thick + fallenSnow[j].thick;
-      
+      print(j, " ");
+      print("R: ", radius_sum);
+      print("  D: ", d, "\n");
       
       if (d < radius_sum) {
         fallenSnow[fallCount] = new FallenSnow(snow[i].x, snow[i].y, snow[i].z);
         snow[i].hasFallen = true;
-        print(fallCount, "!");
+        
         fallCount++;
         break;
       }

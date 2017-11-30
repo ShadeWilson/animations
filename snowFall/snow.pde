@@ -5,7 +5,7 @@ class Snow {
   float thick = map(z, 0, 1, 0.5, 4);
   boolean hasFallen = false;
   
-  float yspeedMax = 0.7;
+  float yspeedMax = 1;
   float yspeedMin = 0.3;
   
   float xspeedMax = 0.05 * z;
@@ -22,22 +22,13 @@ class Snow {
     x = x + xspeed;
     y = y + yspeed;
     
-    // if snowflakes reach the bottom of the screen
-    // they're reset at the top
-    if (y >= height + 1) {
-      y = random(-200, -100);
-      yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
-      hasFallen = false;
-    }
     
-    // if snowflakes go off the screen left or right
+    // if snowflakes reach the bottom of the screen, or
+    // if snowflakes go off the screen left or right, or
+    // if the snowflake has contacted a fallen snowflake
     // they're reset at the top
-    if (x > width || x < 0) {
-      y = random(-200, -100);
-      yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
-      x = random(width);
-      xspeed = random(-xspeedMax, xspeedMax);
-      hasFallen = false;
+    if (y >= height + 1 || x > width || x < 0 || hasFallen == true) {
+      reset();
     }
     
     // if the speed in the x direction is greater than the limit
@@ -51,6 +42,15 @@ class Snow {
       }
     }
   }
+  
+  void reset() {
+    y = random(-200, -100);
+      yspeed = map(z, 0, 1, yspeedMin, yspeedMax);
+      x = random(width);
+      xspeed = random(-xspeedMax, xspeedMax);
+      hasFallen = false;
+  }
+  
   
   void show() {
     noStroke();
