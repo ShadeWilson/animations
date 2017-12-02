@@ -16,4 +16,9 @@ void draw() {
     snow[i].fall();
     snow[i].show();
  }
+ 
+ // saving frames to create a gif
+ //if (frameCount > 400 & frameCount < 1000) {
+ //  saveFrame("/Users/shadewilson/Desktop/Coding/Processing/to_gifs/frame-####.tif");
+ //}
 }
