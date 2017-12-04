@@ -14,25 +14,31 @@ class Me {
     
     print(xdist, "\n");
     
-    xspeed = map(xdist, 0, width, 10, 0);
-    yspeed = map(ydist, 0, height, 10, 0);
+    float xaccel = map(xdist, 0, width, 1, -5);
+    float yaccel = map(ydist, 0, height, 1, -5);
+    xspeed = map(xdist, 0, width, 1, -5) + xaccel;
+    yspeed = map(ydist, 0, height, 1, -5) + yaccel;
     x = x + xspeed * xdir;
     y = y + yspeed * ydir;
     
-    stop();
+    reappear();
   }
   
-  void stop() {
+  void reappear() {
     if (x > width) {
-      x = width;
-    } else if (x < 0) {
       x = 0;
+      y = random(0, height);
+    } else if (x < 0) {
+      x = width;
+      y = random(0, height);
     }
     
     if (y > height) {
-      y = height;
+      x = random(0, width);
+      y = 0;
     } else if (y < 0) {
-      y = 0; 
+      x = random(0, width);
+      y = height; 
     }
     
   }
