@@ -1,6 +1,6 @@
 public class Ball {
   private final float RADIUS = 5;
-  private final float SPEED = 1;
+  private final float SPEED = 10;
   
   private float x, y;
   private float dx, dy;
@@ -11,7 +11,6 @@ public class Ball {
     this.y = y;
     this.direction = random(0, 2 * PI);
     changeDirection(direction);
-    println(direction);
   }
   
   
@@ -28,8 +27,19 @@ public class Ball {
   }
   
   public void move() {
+    reflect();
     this.x += dx;
     this.y += dy;
+  }
+  
+  private void reflect() {
+    if (x <= 0 || x >= width) {
+      this.dx = this.dx * -1;
+    }
+    
+    if (y <= 0 || y >= height) {
+      this.dy = this.dy * -1;
+    }
   }
   
   
