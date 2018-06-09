@@ -2,7 +2,7 @@ class Snow {
   float x = random(width);
   float y = random(-500, -50);
   float z = random(0, 1);
-  float thick = map(z, 0, 1, 0.5, 4);
+  float thick = map(z, 0, 1, 2, 10);
   boolean hasFallen = false;
   
   float yspeedMax = 1;

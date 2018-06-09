@@ -1,10 +1,10 @@
-Snow[] snow = new Snow[400];
+Snow[] snow = new Snow[700];
 
 int fallCount = 0;
 float maxHeight = 4;
 
 void setup() {
-  size(640, 360);
+  size(2000, 2000);
   for (int i=0; i<snow.length; i++) {
     snow[i] = new Snow();
   }
