@@ -8,9 +8,9 @@ public class Board {
   private float dx;
   private int hitCounter;
   
-  public Board() {
-    this.x = width * 2;
-    this.y = height * 3.5;
+  public Board(float x, float y) {
+    this.x = x;
+    this.y = y;
     this.dx = 0;
     this.hitCounter = 0;
   }
@@ -46,8 +46,8 @@ public class Board {
     float ballX = b.getX();
     float ballY = b.getY();
     
-    boolean isHit = ballY >= getY() && ballY <= getY() + HEIGHT && 
-           ballX >= getX() && ballX <= getX() + WIDTH; 
+    boolean isHit = ballY >= getY() && ballY <= getY() + HEIGHT + 5 && 
+           ballX >= getX() && ballX <= getX() + WIDTH + 3; 
            
     if (isHit) {
         hitCounter++;
