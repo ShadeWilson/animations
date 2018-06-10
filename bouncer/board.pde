@@ -6,11 +6,13 @@ public class Board {
   
   private float x, y;
   private float dx;
+  private int hitCounter;
   
   public Board() {
     this.x = width * 2;
     this.y = height * 3.5;
     this.dx = 0;
+    this.hitCounter = 0;
   }
   
   public float getX() {
@@ -38,6 +40,24 @@ public class Board {
   
   public void setDirection(int d) {
     this.dx = d * SPEED;
+  }
+  
+  public boolean ballHitBoard(Ball b) {
+    float ballX = b.getX();
+    float ballY = b.getY();
+    
+    boolean isHit = ballY >= getY() && ballY <= getY() + HEIGHT && 
+           ballX >= getX() && ballX <= getX() + WIDTH; 
+           
+    if (isHit) {
+        hitCounter++;
+    }
+    
+    return isHit;
+  }
+  
+  public String hitCounter() {
+    return this.hitCounter + "";
   }
   
   
