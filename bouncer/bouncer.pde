@@ -1,6 +1,11 @@
+import java.util.Map;
 Board player1 = new Board(width * 2, height * 3.5); 
 Board player2 = new Board(width * 2, height * 0.5); 
 Ball ball;
+
+Keyboard p1Keys = new Keyboard(LEFT, RIGHT);
+Keyboard p2Keys = new Keyboard('a', 'd');
+  
 PFont f;  
 
 void setup() {
@@ -16,6 +21,9 @@ void draw() {
   player2.show();
   ball.show();
   
+  setDirections(p1Keys, player1);
+  setDirections(p2Keys, player2);
+  
   player1.move();
   player2.move();
   ball.move(player1.ballHitBoard(ball) || player2.ballHitBoard(ball));
@@ -29,21 +37,32 @@ void draw() {
 
 public void keyPressed() {
   if (key == CODED) {
-    if (keyCode == LEFT) {
-      player1.setDirection(-1);
-    } else if (keyCode == RIGHT) {
-      player1.setDirection(1);
+    if (keyCode == LEFT || keyCode == RIGHT) {
+      p1Keys.pressKey(keyCode);
     }
   }
   
-  if (key == 'a') {
-    player2.setDirection(-1);
-  } else if (key == 'd') {
-    player2.setDirection(1);
+  if (key == 'a' || key == 'd') {
+    p2Keys.pressKey(key);
   }
 }
 
 public void keyReleased() {
-  player1.setDirection(0);
-  player2.setDirection(0);
+  if (key == CODED && keyCode == LEFT || keyCode == RIGHT) {
+    p1Keys.releaseKey(keyCode);
+  } else if (key == 'a' || key == 'd') {
+    p2Keys.releaseKey(key);
+  }
+}
+
+
+public void setDirections(Keyboard k, Board player) {
+  // player 1 first
+  if (k.currentKey() == k.left()) {
+      player.setDirection(-1);
+  } else if (k.currentKey() == k.right()) {
+    player.setDirection(1);
+  } else {
+     player.setDirection(0);
+  }
 }
