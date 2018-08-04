@@ -10,7 +10,7 @@ PFont f;
 
 void setup() {
   size(400, 400);
-  ball = new Ball(100, 200);
+  ball = new Ball();
   f = createFont("Arial",16,true); 
   
 }
